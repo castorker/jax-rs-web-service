@@ -1,5 +1,6 @@
 package com.webservice.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -15,6 +16,7 @@ public class Quibble {
 	public void setId(int id) {
 		this.id = id;
 	}
+	// @XmlElement(name="joke")
 	public String getText() {
 		return text;
 	}

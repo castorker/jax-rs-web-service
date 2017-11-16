@@ -17,7 +17,7 @@ public class QuibbleResource {
 	private QuibbleRepository quibbleRepository = new QuibbleRepositoryStub();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Quibble> getAll() { 
 		return quibbleRepository.GetAll();
 	}
