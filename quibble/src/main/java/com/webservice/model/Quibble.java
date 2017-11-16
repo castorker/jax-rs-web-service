@@ -9,6 +9,7 @@ public class Quibble {
 	private int id;
 	private String text;
 	private String category;
+	private Author author;
 	
 	public int getId() {
 		return id;
@@ -28,5 +29,11 @@ public class Quibble {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public Author getAuthor() {
+		return author;
+	}
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 }

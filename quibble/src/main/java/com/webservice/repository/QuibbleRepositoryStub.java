@@ -3,6 +3,7 @@ package com.webservice.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.webservice.model.Author;
 import com.webservice.model.Quibble;
 
 public class QuibbleRepositoryStub implements QuibbleRepository {
@@ -40,6 +41,13 @@ public class QuibbleRepositoryStub implements QuibbleRepository {
 		quibble1.setText("Why do Java Programmers wear glasses? Because they don't see sharp.");
 		quibble1.setCategory("Technology");
 
+		Author author = new Author();
+		author.setId(1234);
+		author.setName("Unknown");
+		author.setCountry("Unknown");
+		
+		quibble1.setAuthor(author);
+		
 		return quibble1;
 	}
 }
