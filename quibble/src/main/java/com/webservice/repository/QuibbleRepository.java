@@ -8,4 +8,6 @@ public interface QuibbleRepository {
 
 	List<Quibble> GetAll();
 
+	Quibble GetById(int quibbleId);
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -21,4 +22,15 @@ public class QuibbleResource {
 	public List<Quibble> getAll() { 
 		return quibbleRepository.GetAll();
 	}
+	
+	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
+	public Quibble getById(@PathParam ("quibbleId") int quibbleId) {
+		
+		// System.out.println("Getting quibble Id: " + quibbleId);
+		
+		return quibbleRepository.GetById(quibbleId);
+	}
+	
 }

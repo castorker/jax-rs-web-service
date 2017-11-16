@@ -31,4 +31,15 @@ public class QuibbleRepositoryStub implements QuibbleRepository {
 		
 		return quibbles;
 	}
+	
+	@Override
+	public Quibble GetById(int quibbleId) {
+
+		Quibble quibble1 = new Quibble();
+		quibble1.setId(1);
+		quibble1.setText("Why do Java Programmers wear glasses? Because they don't see sharp.");
+		quibble1.setCategory("Technology");
+
+		return quibble1;
+	}
 }
