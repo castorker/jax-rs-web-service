@@ -10,4 +10,6 @@ public interface QuibbleRepository {
 
 	Quibble GetById(int quibbleId);
 
+	void create(Quibble quibble);
+
 }

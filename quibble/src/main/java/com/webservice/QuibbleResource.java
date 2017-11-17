@@ -2,11 +2,14 @@ package com.webservice;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.webservice.model.Author;
 import com.webservice.model.Quibble;
@@ -36,11 +39,40 @@ public class QuibbleResource {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{quibbleId}/author")	// http://localhost:8080/quibble-service/webapi/quibbles/1/author
 	public Author getQuibbleAuthor(@PathParam ("quibbleId") int quibbleId) {
-		
 		// Quibble quibble = quibbleRepository.GetById(quibbleId);
 		// Author author = quibble.getAuthor();
 		// return author;
 		return quibbleRepository.GetById(quibbleId).getAuthor();
 	}
 
+	@POST
+	@Path("quibble")	// http://localhost:8080/quibble-service/webapi/quibbles/quibble
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Quibble createQuibble(Quibble quibble) {
+		// System.out.println(quibble.getText());
+		// System.out.println(quibble.getCategory());
+
+		quibbleRepository.create(quibble);
+		
+		return quibble;
+	}
+	
+	@POST
+	@Path("quibble")	// http://localhost:8080/quibble-service/webapi/quibbles/quibble
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Quibble createQuibbleParams(MultivaluedMap<String, String> formParams) {
+		// System.out.println(formParams.getFirst("text"));
+		// System.out.println(formParams.getFirst("category"));
+		
+		Quibble quibble = new Quibble();
+		quibble.setText(formParams.getFirst("text"));
+		quibble.setCategory(formParams.getFirst("category"));
+		
+		quibbleRepository.create(quibble);
+
+		return quibble;
+	}
+	
 }

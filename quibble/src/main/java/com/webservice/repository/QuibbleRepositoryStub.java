@@ -50,4 +50,11 @@ public class QuibbleRepositoryStub implements QuibbleRepository {
 		
 		return quibble1;
 	}
+	
+	@Override
+	public void create(Quibble quibble) {
+		// TODO Auto-generated method stub
+		// insert statement to the database
+		
+	}
 }
