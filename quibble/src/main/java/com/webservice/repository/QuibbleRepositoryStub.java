@@ -132,9 +132,21 @@ public class QuibbleRepositoryStub implements QuibbleRepository, Serializable {
 			this.getQuibbles().add(quibble);
 			Save();
 			return quibble;
-		}
-		else {
+		} else {
 			return create(quibble);
 		}
 	}
+
+	@Override
+	public String delete(int quibbleId) {
+
+		Quibble found = this.getQuibbles().stream().filter(q -> q.getId() == quibbleId).findFirst().orElse(null);
+		if (found != null) {
+			this.getQuibbles().remove(found);
+			Save();
+			return "Quibble " + quibbleId + " has been deleted.";
+		} else {
+			return "Quibble " + quibbleId + " does not exist.";
+		}
+	}	
 }

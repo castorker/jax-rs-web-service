@@ -14,4 +14,6 @@ public interface QuibbleRepository {
 
 	Quibble update(Quibble quibble);
 
+	String delete(int quibbleId);
+
 }

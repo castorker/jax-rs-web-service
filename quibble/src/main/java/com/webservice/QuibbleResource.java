@@ -3,6 +3,7 @@ package com.webservice;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -82,5 +83,15 @@ public class QuibbleResource {
 		// System.out.println(quibble.getCategory());
 
 		return quibbleRepository.update(quibble);
+	 }
+
+	@DELETE
+	@Path("{quibbleId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
+	public String deleteQuibble(@PathParam ("quibbleId") int quibbleId) {
+		// System.out.println(quibbleId);
+
+		return quibbleRepository.delete(quibbleId);
 	 }
 }
