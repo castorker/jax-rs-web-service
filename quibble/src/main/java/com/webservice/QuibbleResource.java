@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -63,14 +64,23 @@ public class QuibbleResource {
 	public Quibble createQuibbleParams(MultivaluedMap<String, String> formParams) {
 		// System.out.println(formParams.getFirst("text"));
 		// System.out.println(formParams.getFirst("category"));
-		
+
 		Quibble quibble = new Quibble();
 		quibble.setText(formParams.getFirst("text"));
 		quibble.setCategory(formParams.getFirst("category"));
-		
-		quibbleRepository.create(quibble);
 
-		return quibble;
+		return quibbleRepository.create(quibble);
 	}
-	
+
+	@PUT
+	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Quibble updateQuibble(Quibble quibble) {
+		// System.out.println(quibble.getId());
+		// System.out.println(quibble.getText());
+		// System.out.println(quibble.getCategory());
+
+		return quibbleRepository.update(quibble);
+	 }
 }

@@ -12,4 +12,6 @@ public interface QuibbleRepository {
 
 	Quibble create(Quibble quibble);
 
+	Quibble update(Quibble quibble);
+
 }

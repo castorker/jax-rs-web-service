@@ -111,16 +111,30 @@ public class QuibbleRepositoryStub implements QuibbleRepository, Serializable {
 
 	// Define comparator
     Comparator <Quibble> comparator = (q1, q2) -> Integer.compare(q1.getId(), q2.getId());
-	
+
 	@Override
 	public Quibble create(Quibble quibble) {
-		
-		// insert statement to the database
-		
+		// insert into the database
 		int lastId = this.getQuibbles().stream().max(comparator).get().getId();
 		quibble.setId(lastId + 1);
 		this.getQuibbles().add(quibble);
 		Save();
 		return quibble;
+	}
+
+	@Override
+	public Quibble update(Quibble quibble) {
+
+		Quibble found = this.getQuibbles().stream().filter(q -> q.getId() == quibble.getId()).findFirst().orElse(null);
+
+		if (found != null) {
+			this.getQuibbles().remove(found);
+			this.getQuibbles().add(quibble);
+			Save();
+			return quibble;
+		}
+		else {
+			return create(quibble);
+		}
 	}
 }
