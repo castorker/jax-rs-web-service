@@ -1,9 +1,12 @@
 package com.webservice.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
+@SuppressWarnings("serial")
 @XmlRootElement
-public class Author {
+public class Author implements Serializable {
 
 	private int id;
 	private String name;

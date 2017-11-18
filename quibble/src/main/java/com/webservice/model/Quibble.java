@@ -1,10 +1,13 @@
 package com.webservice.model;
 
+import java.io.Serializable;
+
 // import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@SuppressWarnings("serial")
 @XmlRootElement
-public class Quibble {
+public class Quibble implements Serializable {
 
 	private int id;
 	private String text;

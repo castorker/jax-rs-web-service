@@ -53,9 +53,7 @@ public class QuibbleResource {
 		// System.out.println(quibble.getText());
 		// System.out.println(quibble.getCategory());
 
-		quibbleRepository.create(quibble);
-		
-		return quibble;
+		return quibbleRepository.create(quibble);
 	}
 	
 	@POST
