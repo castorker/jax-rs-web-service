@@ -103,9 +103,10 @@ public class QuibbleRepositoryStub implements QuibbleRepository, Serializable {
 	public List<Quibble> GetAll () {
 		return this.getQuibbles();
 	}
-	
+
 	@Override
 	public Quibble GetById(int quibbleId) {
+		// return this.getQuibbles().stream().filter(q -> q.getId() == quibbleId).findFirst().get();
 		return this.getQuibbles().stream().filter(q -> q.getId() == quibbleId).findFirst().orElseGet(() -> new Quibble());
 	}
 
@@ -146,7 +147,8 @@ public class QuibbleRepositoryStub implements QuibbleRepository, Serializable {
 			Save();
 			return "Quibble " + quibbleId + " has been deleted.";
 		} else {
-			return "Quibble " + quibbleId + " does not exist.";
+			//return "Quibble " + quibbleId + " does not exist.";
+			return null;
 		}
 	}	
 }

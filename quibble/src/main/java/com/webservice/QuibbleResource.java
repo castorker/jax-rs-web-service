@@ -12,6 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.webservice.model.Author;
 import com.webservice.model.Quibble;
@@ -22,19 +24,31 @@ import com.webservice.repository.QuibbleRepositoryStub;
 public class QuibbleResource {
 
 	private QuibbleRepository quibbleRepository = new QuibbleRepositoryStub();
-	
+
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Quibble> getAll() { 
 		return quibbleRepository.GetAll();
 	}
-	
+
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
-	public Quibble getById(@PathParam ("quibbleId") int quibbleId) {
+	public Response getById(@PathParam ("quibbleId") String quibbleId) {
+
+		if (quibbleId == null || quibbleId.length() < 1 || Integer.parseInt(quibbleId) < 0) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+
 		// System.out.println("Getting quibble Id: " + quibbleId);
-		return quibbleRepository.GetById(quibbleId);
+
+		Quibble quibble = quibbleRepository.GetById(Integer.parseInt(quibbleId));
+
+		if (quibble == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+
+		return Response.ok().entity(quibble).build();
 	}
 
 	@GET
@@ -54,7 +68,6 @@ public class QuibbleResource {
 	public Quibble createQuibble(Quibble quibble) {
 		// System.out.println(quibble.getText());
 		// System.out.println(quibble.getCategory());
-
 		return quibbleRepository.create(quibble);
 	}
 	
@@ -77,21 +90,33 @@ public class QuibbleResource {
 	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Quibble updateQuibble(Quibble quibble) {
+	public Response updateQuibble(Quibble quibble) {
 		// System.out.println(quibble.getId());
 		// System.out.println(quibble.getText());
 		// System.out.println(quibble.getCategory());
 
-		return quibbleRepository.update(quibble);
-	 }
+		quibble = quibbleRepository.update(quibble);
+
+		return Response.ok().entity(quibble).build();
+	}
 
 	@DELETE
 	@Path("{quibbleId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
-	public String deleteQuibble(@PathParam ("quibbleId") int quibbleId) {
+	public Response deleteQuibble(@PathParam ("quibbleId") String quibbleId) {
 		// System.out.println(quibbleId);
 
-		return quibbleRepository.delete(quibbleId);
-	 }
+		if (quibbleId == null || quibbleId.length() < 1 || Integer.parseInt(quibbleId) < 0) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+
+		String result = quibbleRepository.delete(Integer.parseInt(quibbleId));
+
+		if (result == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+
+		return Response.ok().build();		
+	}
 }
