@@ -23,7 +23,7 @@ public class QuibbleClient {
 	public Quibble getById(int id) {
 
 		// http://localhost:8080/quibble-service/webapi/quibbles/1
-		WebTarget target = client.target("http://localhost:8080/quibble-service/webapi/");
+		WebTarget target = client.target("http://localhost:8080/quibble-rs-service/webapi/");
 
 		// String response = target.path("quibbles/" + id).request().get(String.class);
 		// String response = target.path("quibbles/" + id).request(MediaType.APPLICATION_JSON).get(String.class);
@@ -44,7 +44,7 @@ public class QuibbleClient {
 	public List<Quibble> getAll() {
 
 		// http://localhost:8080/quibble-service/webapi/quibbles
-		WebTarget target = client.target("http://localhost:8080/quibble-service/webapi/");
+		WebTarget target = client.target("http://localhost:8080/quibble-rs-service/webapi/");
 
 		List<Quibble> response = target
 				.path("quibbles")
@@ -57,7 +57,7 @@ public class QuibbleClient {
 	public Quibble create(Quibble quibble) {
 
 		// http://localhost:8080/quibble-service/webapi/quibbles/quibble
-		WebTarget target = client.target("http://localhost:8080/quibble-service/webapi/");
+		WebTarget target = client.target("http://localhost:8080/quibble-rs-service/webapi/");
 
 		Response response = target
 				.path("quibbles/quibble")
@@ -74,7 +74,7 @@ public class QuibbleClient {
 	public Quibble update(Quibble quibble) {
 
 		// http://localhost:8080/quibble-service/webapi/quibbles/14
-		WebTarget target = client.target("http://localhost:8080/quibble-service/webapi/");
+		WebTarget target = client.target("http://localhost:8080/quibble-rs-service/webapi/");
 
 		Response response = target
 				.path("quibbles/" + quibble.getId())
@@ -91,7 +91,7 @@ public class QuibbleClient {
 	public void delete(int id) {
 
 		// http://localhost:8080/quibble-service/webapi/quibbles/14
-		WebTarget target = client.target("http://localhost:8080/quibble-service/webapi/");
+		WebTarget target = client.target("http://localhost:8080/quibble-rs-service/webapi/");
 
 		Response response = target
 				.path("quibbles/" + id)

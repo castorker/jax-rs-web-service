@@ -20,7 +20,7 @@ import com.webservice.model.Quibble;
 import com.webservice.repository.QuibbleRepository;
 import com.webservice.repository.QuibbleRepositoryStub;
 
-@Path("quibbles")	// http://localhost:8080/quibble-service/webapi/quibbles
+@Path("quibbles")	// http://localhost:8080/quibble-rs-service/webapi/quibbles
 public class QuibbleResource {
 
 	private QuibbleRepository quibbleRepository = new QuibbleRepositoryStub();
@@ -33,7 +33,7 @@ public class QuibbleResource {
 
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
+	@Path("{quibbleId}")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/1
 	public Response getById(@PathParam ("quibbleId") String quibbleId) {
 
 		if (quibbleId == null || quibbleId.length() < 1 || Integer.parseInt(quibbleId) < 0) {
@@ -53,7 +53,7 @@ public class QuibbleResource {
 
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{quibbleId}/author")	// http://localhost:8080/quibble-service/webapi/quibbles/1/author
+	@Path("{quibbleId}/author")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/1/author
 	public Author getQuibbleAuthor(@PathParam ("quibbleId") int quibbleId) {
 		// Quibble quibble = quibbleRepository.GetById(quibbleId);
 		// Author author = quibble.getAuthor();
@@ -62,7 +62,7 @@ public class QuibbleResource {
 	}
 
 	@POST
-	@Path("quibble")	// http://localhost:8080/quibble-service/webapi/quibbles/quibble
+	@Path("quibble")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/quibble
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Quibble createQuibble(Quibble quibble) {
@@ -72,7 +72,7 @@ public class QuibbleResource {
 	}
 	
 	@POST
-	@Path("quibble")	// http://localhost:8080/quibble-service/webapi/quibbles/quibble
+	@Path("quibble")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/quibble
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Quibble createQuibbleParams(MultivaluedMap<String, String> formParams) {
@@ -87,7 +87,7 @@ public class QuibbleResource {
 	}
 
 	@PUT
-	@Path("{quibbleId}")	// http://localhost:8080/quibble-service/webapi/quibbles/1
+	@Path("{quibbleId}")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/1
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response updateQuibble(Quibble quibble) {
@@ -101,7 +101,7 @@ public class QuibbleResource {
 	}
 
 	@DELETE
-	@Path("{quibbleId}")
+	@Path("{quibbleId}")	// http://localhost:8080/quibble-rs-service/webapi/quibbles/1
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 	public Response deleteQuibble(@PathParam ("quibbleId") String quibbleId) {
